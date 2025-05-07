@@ -1,0 +1,7 @@
+GOOGLE_CONFIG_PATH="config/google-sheet.json"
+SPREADSHEET_URL=""
+SHEET_NAME="Planning"
+EVENT_TYPE="70.3"
+OUTPUT_TYPE="csv"
+OUTPUT_PATH="out/training_plan.csv"
+UNITS="km"
