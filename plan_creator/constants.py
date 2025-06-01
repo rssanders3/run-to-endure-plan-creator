@@ -13,7 +13,11 @@ BIKE_SPEED_CELL = "M1"
 RUN_PACE_CELL = "R1"
 
 SHEET_RANGE_MAP = {
-    "SPRINT": "D5:AL74",
+    "SPRINT": "D5:AL74", # TBD
     "OLYMPIC": "D5:AL74",
-    "70.3": "D5:AL74"
+    "70.3": "D5:AL74",
+    "5K": "D5:AL74", # TBD
+    "10K": "D5:AL74", # TBD
+    "HALFMARATHON": "D5:AL74", # TBD
+    "MARATHON": "D5:AL94"
 }

@@ -2,7 +2,11 @@ from plan_creator.constants import *
 from plan_creator.plan_library.swim_builder import SwimBuilder
 from plan_creator.plan_library.ride_builder import RideBuilder
 from plan_creator.plan_library.run_builder import RunBuilder
+import math
 import logging
+
+# Create Logger
+logger = logging.getLogger(__name__)
 
 class PlanDayBuilder:
 
@@ -30,6 +34,12 @@ class PlanDayBuilder:
         else:
             raise ValueError("Invalid units. Please use 'km' or 'mi'.")
         
+    def _get_distance_rounded_or_half(self, distance_km, distance_mi):
+        distance = self._get_distance(distance_km, distance_mi)
+        if (distance - math.floor(distance)) > 0.25 and (distance - math.floor(distance)) < 0.75:
+            return int(math.floor(distance)) + .5
+        return int(round(distance))
+
     def _get_distance_rounded(self, distance_km, distance_mi):
         return int(round(self._get_distance(distance_km, distance_mi)))
 
@@ -56,7 +66,7 @@ class PlanDayBuilder:
 
     def add_run(self, time, distance_km, distance_mi, hr_zone):
         self.has_run = True
-        distance = self._get_distance_rounded(distance_km, distance_mi)
+        distance = self._get_distance_rounded_or_half(distance_km, distance_mi)
         self.discipline.append("Run")
         workout_type, summary = self.run_builder.generate_run_workout(time, distance, hr_zone)
         self.workout_type.append(workout_type)
@@ -96,7 +106,7 @@ class PlanDayBuilder:
 
         processed_summary = self.summary.copy()
         if len(self.summary) > 1:
-            processed_summary = [f"Workout {i + 1}:\n{item}" for i, item in enumerate(self.summary)]
+            processed_summary = [f"Workout {i + 1} ({self.discipline[i] if self.discipline[i] is not 'Workout' else 'Strength'}):\n{item}" for i, item in enumerate(self.summary)]
         return {
             "Discipline": " & ".join(self.discipline),
             "WorkoutType": " & ".join(self.workout_type),
@@ -104,9 +114,6 @@ class PlanDayBuilder:
         }
 
 class PlanProcessor():
-
-    # Create Logger
-    logger = logging.getLogger(__name__)
 
     def __init__(self, paces, units):
         self.paces = paces
@@ -119,15 +126,15 @@ class PlanProcessor():
         week_num = 0
         for week_start in range(0, len(data), 5):  # Iterate over weeks (5 rows at a time)
             week_num += 1
-            self.logger.debug(f"Week Num: {week_num}")
+            logger.debug(f"Week Num: {week_num}")
             week_data = data[week_start:week_start + 5]  # Get 5 rows for the week
             week_output_data = {}
             day_num = 0
             for day_start in range(0, len(week_data[0]), 5):  # Iterate over days (5 columns at a time)
                 day_num += 1
-                self.logger.debug(f"Day Num: {day_num}")
+                logger.debug(f"Day Num: {day_num}")
                 day_values = [week_row[day_start:day_start + 5] for week_row in week_data]  # Get 5 columns for the day
-                self.logger.debug(f"Day Values: {day_values}")
+                logger.debug(f"Day Values: {day_values}")
 
                 week_output_data[DAY_NUM_WEEK_MAP[day_num]] = self._parse_day_values(week_num, day_num, day_values)
 

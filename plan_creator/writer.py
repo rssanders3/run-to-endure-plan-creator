@@ -1,10 +1,10 @@
 import csv
 import logging
 
-class Writer:
+# Create Logger
+logger = logging.getLogger(__name__)
 
-    # Create Logger
-    logger = logging.getLogger(__name__)
+class Writer:
 
     def __init__(self):
         pass
@@ -32,16 +32,13 @@ class Writer:
 
 class CSVWriter(Writer):
 
-    # Create Logger
-    logger = logging.getLogger(__name__)
-
     def write(self, training_plan_master, output_path):
         output_rows = self._convert_to_output_rows(training_plan_master)
         with open(output_path, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             for row in output_rows:
                 writer.writerow(row)
-        self.logger.info(f"Data written to {output_path} successfully.")
+        logger.info(f"Data written to {output_path} successfully.")
 
 class WriterBuilder:
 

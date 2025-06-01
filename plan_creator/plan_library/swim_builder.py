@@ -1,4 +1,8 @@
 import textwrap
+import logging
+
+# Create Logger
+logger = logging.getLogger(__name__)
 
 class SwimBuilder:
 
@@ -19,7 +23,7 @@ class SwimBuilder:
             tuple: A tuple containing two strings: workout type and workout summary.
         """
         distance_meters = distance * 1000
-        main_distance = distance_meters - (200 + 200)  # 200m warmup and cooldown
+        main_distance = int(distance_meters - (200 + 200))  # 200m warmup and cooldown
 
         # todo: detect Open Water Swim
         if hr_zone == '1':
@@ -49,8 +53,12 @@ class SwimBuilder:
         elif hr_zone == '3':
             workout_type = "Tempo Swim"
             summary = textwrap.dedent(f"""
+            Warm Up:
+            4x50m
             Main Set:
-            {distance}-{self.units} @ Z3 (RPE: 6)
+            {main_distance}-{self.units} @ Z3 (RPE: 6)
+            Cooldown:
+            4x50m                       
             """).strip("\n")
         elif hr_zone == '4':
             workout_type = "Threshold Swim"
@@ -66,6 +74,6 @@ class SwimBuilder:
             HR Zone: {hr_zone}
             """).strip("\n")
         else:
-            raise ValueError("Invalid heart rate zone. Please use a value between 1 and 5.")
+            raise ValueError(f"Heart Rate Zone '{hr_zone}' is invalid. Please use a value between 1 and 5. (Other Row Details: Week: {self.week_num}, Day: {self.day_num}, Time: {time}, Distance: {distance}, HR Zone: {hr_zone})")
 
         return workout_type, summary

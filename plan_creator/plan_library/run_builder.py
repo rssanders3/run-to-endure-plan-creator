@@ -1,4 +1,8 @@
 import textwrap
+import logging
+
+# Create Logger
+logger = logging.getLogger(__name__)
 
 class RunBuilder:
 
@@ -50,12 +54,14 @@ class RunBuilder:
             {warmup_distance}-{self.units} @ Z1 (RPE: 3)
             Running Form Drills (Butt Kicks, High Knees, etc.)
             Main Set:
-            {cooldown_distance}-{self.units} @ Z3 (RPE: 6)
+            {main_distance}-{self.units} @ Z3 (RPE: 7)
             Cool Down:
-            {main_distance}-{self.units} @ Z1 (RPE: 3)
+            {cooldown_distance}-{self.units} @ Z1 (RPE: 3)
             """).lstrip("\n")
         elif hr_zone == '4':
             workout_type = "Interval Run"
+            warmup_distance = self.get_warmup_and_cooldown_distance()
+            cooldown_distance = self.get_warmup_and_cooldown_distance()
             # todo: set pace and number of intervals
             summary = textwrap.dedent(f"""
             Main Set:
@@ -63,9 +69,9 @@ class RunBuilder:
             {warmup_distance}-{self.units} @ Z1 (RPE: 3)
             Running Form Drills (Butt Kicks, High Knees, etc.)
             Main Set:
-            5x1-km @ 5:15/km Pace with 1-min rest
+            5x1-km @ 5:15/km Pace with 1-min rest - TODO - FIGURE OUT
             Cool Down:
-            {main_distance}-{self.units} @ Z1 (RPE: 3)
+            {cooldown_distance}-{self.units} @ Z1 (RPE: 3)
             """).lstrip("\n")
         elif hr_zone == '5':
             workout_type = "Interval Run"
@@ -75,6 +81,6 @@ class RunBuilder:
             HR Zone: {hr_zone}
             """).lstrip("\n")
         else:
-            raise ValueError("Invalid heart rate zone. Please use a value between 1 and 5.")
+            raise ValueError(f"Heart Rate Zone '{hr_zone}' is invalid. Please use a value between 1 and 5. (Other Row Details: Week: {self.week_num}, Day: {self.day_num}, Time: {time}, Distance: {distance}, HR Zone: {hr_zone})")
 
         return workout_type, summary

@@ -1,4 +1,8 @@
 import textwrap
+import logging
+
+# Create Logger
+logger = logging.getLogger(__name__)
 
 class RideBuilder:
 
@@ -58,6 +62,6 @@ class RideBuilder:
             HR Zone: {hr_zone}
             """).lstrip("\n")
         else:
-            raise ValueError("Invalid heart rate zone. Please use a value between 1 and 5.")
+            raise ValueError(f"Heart Rate Zone '{hr_zone}' is invalid. Please use a value between 1 and 5. (Other Row Details: Week: {self.week_num}, Day: {self.day_num}, Time: {time}, Distance: {distance}, HR Zone: {hr_zone})")
 
         return workout_type, summary

@@ -178,3 +178,6 @@ cython_debug/
 
 # Config files - Use specific configurations for accessing Google APIs
 config/*.json
+
+# Files within the out directory
+out/*.csv
