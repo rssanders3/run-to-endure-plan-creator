@@ -27,7 +27,7 @@ def main():
         "EVENT_TYPE: %s\n"
         "OUTPUT_TYPE: %s\n"
         "OUTPUT_PATH: %s\n"
-        "UNITS: %s\n",
+        "UNITS: %s",
         GOOGLE_CONFIG_PATH,
         SPREADSHEET_URL,
         SHEET_NAME,

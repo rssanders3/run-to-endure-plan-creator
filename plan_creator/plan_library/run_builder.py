@@ -48,8 +48,8 @@ class RunBuilder:
             warmup_distance = self.get_warmup_and_cooldown_distance()
             cooldown_distance = self.get_warmup_and_cooldown_distance()
             main_distance = distance - (warmup_distance + cooldown_distance)
-            # todo: set pace
             summary = textwrap.dedent(f"""
+            TODO: REVIEW THIS:
             Warm Up:
             {warmup_distance}-{self.units} @ Z1 (RPE: 3)
             Running Form Drills (Butt Kicks, High Knees, etc.)
@@ -64,19 +64,19 @@ class RunBuilder:
             cooldown_distance = self.get_warmup_and_cooldown_distance()
             # todo: set pace and number of intervals
             summary = textwrap.dedent(f"""
-            Main Set:
+            TODO: REVIEW THIS:
             Warm Up:
             {warmup_distance}-{self.units} @ Z1 (RPE: 3)
             Running Form Drills (Butt Kicks, High Knees, etc.)
             Main Set:
-            5x1-km @ 5:15/km Pace with 1-min rest - TODO - FIGURE OUT
+            5x1-km @ 5:15/km Pace with 1-min rest
             Cool Down:
             {cooldown_distance}-{self.units} @ Z1 (RPE: 3)
             """).lstrip("\n")
         elif hr_zone == '5':
             workout_type = "Interval Run"
             summary = textwrap.dedent(f"""
-            TODO - FIGURE OUT
+            TODO: REVIEW THIS:
             Distance: {distance}-{self.units}
             HR Zone: {hr_zone}
             """).lstrip("\n")

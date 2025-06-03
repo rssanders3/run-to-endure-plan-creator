@@ -1,7 +1,13 @@
 GOOGLE_CONFIG_PATH="config/google-sheet.json"
+
 SPREADSHEET_URL=""
 SHEET_NAME="Planning"
+
+# What Event to Plan For (Options: SPRINT, OLYMPIC, 70.3, 5K, 10K, HALFMARATHON, MARATHON)
 EVENT_TYPE="70.3"
+
+# What Units to Use (Options: km, mi)
+UNITS="km"
+
 OUTPUT_TYPE="csv"
 OUTPUT_PATH="out/training_plan.csv"
-UNITS="km"

@@ -39,6 +39,7 @@ class RideBuilder:
             # Set as Tempo Ride
             workout_type = "Interval Ride"
             summary = textwrap.dedent(f"""
+            TODO: REVIEW THIS:
             Warm Up:
             3-km @ Z1 (RPE: 3)
             Main Set:
@@ -51,13 +52,14 @@ class RideBuilder:
         elif hr_zone == '4':
             workout_type = "Interval Ride"
             summary = textwrap.dedent(f"""
-            Main Set:
-            {distance}-{self.units} @ Z4 (RPE: 7)
+            TODO: REVIEW THIS:
+            Distance: {distance}-{self.units}
+            HR Zone: {hr_zone}
             """).lstrip("\n")
         elif hr_zone == '5':
             workout_type = "Interval Ride"
             summary = textwrap.dedent(f"""
-            TODO - FIGURE OUT
+            TODO: REVIEW THIS:
             Distance: {distance}-{self.units}
             HR Zone: {hr_zone}
             """).lstrip("\n")

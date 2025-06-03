@@ -28,8 +28,8 @@ class SwimBuilder:
         # todo: detect Open Water Swim
         if hr_zone == '1':
             workout_type = "Recovery Swim"
-            main_set_reps = int(main_distance / 50)
             main_set_distance = 50
+            main_set_reps = int(main_distance / main_set_distance)
             summary = textwrap.dedent(f"""
             Warm Up:
             4x50m
@@ -40,9 +40,10 @@ class SwimBuilder:
             """).strip("\n")
         elif hr_zone == '2':
             workout_type = "Easy Swim"
-            main_set_reps = int(main_distance / 50)
-            main_set_distance = 50
+            main_set_distance = 100
+            main_set_reps = int(main_distance / main_set_distance)
             summary = textwrap.dedent(f"""
+            TODO: REVIEW THIS:
             Warm Up:
             4x50m
             Main Set:
@@ -52,7 +53,10 @@ class SwimBuilder:
             """).strip("\n")
         elif hr_zone == '3':
             workout_type = "Tempo Swim"
+            main_set_distance = 100
+            main_set_reps = int(main_distance / main_set_distance)
             summary = textwrap.dedent(f"""
+            TODO: REVIEW THIS:
             Warm Up:
             4x50m
             Main Set:
@@ -63,13 +67,14 @@ class SwimBuilder:
         elif hr_zone == '4':
             workout_type = "Threshold Swim"
             summary = textwrap.dedent(f"""
-            Main Set:
-            {distance}-{self.units} @ Z4 (RPE: 7)
+            TODO: REVIEW THIS:
+            Distance: {distance}-{self.units}
+            HR Zone: {hr_zone}                   
             """).strip("\n")
         elif hr_zone == '5':
             workout_type = "Interval Swim"
             summary = textwrap.dedent(f"""
-            TODO - FIGURE OUT
+            TODO: REVIEW THIS:
             Distance: {distance}-{self.units}
             HR Zone: {hr_zone}
             """).strip("\n")
